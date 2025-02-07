@@ -2,7 +2,7 @@
 Contents the ResultManager Class and its corresponding exception
 """
 from typing import Callable, Union
-from logger_manager import LoggerManager
+from test_utils.logger_manager import LoggerManager
 
 
 
