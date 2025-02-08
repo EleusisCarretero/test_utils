@@ -119,6 +119,27 @@ class ResultManagerClass:
             self._log_result(False, step_msg, details)
             self.step_status = False
 
+    def check_raises_any_given_exception(self, method: Callable, exceptions: Union [Exception, tuple], step_msg: str, *args, **kwargs) -> None:
+        """
+        Validates that any of the 'given' exceptions raises, otherwise the validations fails.
+
+        Args:
+            method(func): The callback function to execute.
+            exceptions (Exception): Exceptions, or tuple of exceptions to validate is/are NOT raised.
+            step_msg(str): Step message to give details of the assertion.
+            args(list): arguments for 'method'.
+            kwargs(dict): arguments for 'method'.
+        """
+        if not isinstance(exceptions, tuple):
+            exceptions = (exceptions,)
+        try:
+            _ = method(*args, **kwargs)
+            self._log_result(False, step_msg)
+        except exceptions as e:
+            details = f"The method '{method.__name__}' raised an exception: {e}."
+            self._log_result(True, step_msg, details)
+            self.step_status = True
+
     def check_less_equals(self, actual_value: Union[int:float], expected_less_equals: Union[int:float], step_msg: str):
         """
         Validates that two values are equals and tracks the result.
