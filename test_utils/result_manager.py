@@ -149,11 +149,12 @@ class ResultManagerClass:
             expected_less_equals(any): The value to compare the results and ensure it is less or equals.
             step_msg(str): Step message to give details of the assertion
         """
+        expression = f"{actual_value} <= {expected_less_equals}"
         try:
-            assert actual_value <= expected_less_equals
+            assert expression
             self._log_result(True, step_msg)
         except AssertionError:
-            details = f"Expected NOT to be: '{expected_less_equals}', but got: '{actual_value}'."
+            details = f"Expected to be: '{expression}', but got: '{actual_value} > {expected_less_equals}'."
             self._log_result(False, step_msg, details)
 
     def check_greater_equals(self, actual_value: Union[int:float], expected_greater_equals: Union[int:float], step_msg: str):
@@ -165,9 +166,28 @@ class ResultManagerClass:
             expected_greater_equals(any): The value to compare the results and ensure it is greater or equals.
             step_msg(str): Step message to give details of the assertion
         """
+        expression = f"{actual_value} >= {expected_greater_equals}"
         try:
-            assert actual_value >= expected_greater_equals
+            assert eval(expression)
             self._log_result(True, step_msg)
         except AssertionError:
-            details = f"Expected NOT to be: '{expected_greater_equals}', but got: '{actual_value}'."
+            details = f"Expected to be: '{expression}', but got: '{actual_value} < {expected_greater_equals}'."
+            self._log_result(False, step_msg, details)
+    
+    def check_within_range(self, actual_value: Union[int:float], expected_value: Union[int:float], within_range: Union[int:float], step_msg: str):
+        """
+        Validates that two values inside a range.
+
+        Args:
+            actual_value(any): The result value gotten from a response.
+            expected_value(any): The value to compare the results and ensure it is the expected.
+            within_range(any): Threshold of the range, upper and lower ones.
+            step_msg(str): Step message to give details of the assertion
+        """
+        expression = f"{expected_value} + {within_range} >= {actual_value} >= {expected_value} - {within_range}"
+        try:
+            assert eval(expression)
+            self._log_result(True, step_msg)
+        except AssertionError:
+            details = f"Expected to be: '{expression}', but got {actual_value} out of range"
             self._log_result(False, step_msg, details)
