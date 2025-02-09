@@ -155,3 +155,19 @@ class ResultManagerClass:
         except AssertionError:
             details = f"Expected NOT to be: '{expected_less_equals}', but got: '{actual_value}'."
             self._log_result(False, step_msg, details)
+
+    def check_greater_equals(self, actual_value: Union[int:float], expected_greater_equals: Union[int:float], step_msg: str):
+        """
+        Validates that two values are equals or grater and tracks the result.
+
+        Args:
+            actual_value(any): The result value gotten from a response.
+            expected_greater_equals(any): The value to compare the results and ensure it is greater or equals.
+            step_msg(str): Step message to give details of the assertion
+        """
+        try:
+            assert actual_value >= expected_greater_equals
+            self._log_result(True, step_msg)
+        except AssertionError:
+            details = f"Expected NOT to be: '{expected_greater_equals}', but got: '{actual_value}'."
+            self._log_result(False, step_msg, details)
