@@ -157,7 +157,7 @@ class ResultManagerClass:
             details = f"Expected to be: '{expression}', but got: '{actual_value} > {expected_less_equals}'."
             self._log_result(False, step_msg, details)
 
-    def check_greater_equals(self, actual_value: Union[int:float], expected_greater_equals: Union[int:float], step_msg: str):
+    def check_greater_equals(self, actual_value: Union[int, float], expected_greater_equals: Union[int, float], step_msg: str):
         """
         Validates that two values are equals or grater and tracks the result.
 
@@ -174,7 +174,7 @@ class ResultManagerClass:
             details = f"Expected to be: '{expression}', but got: '{actual_value} < {expected_greater_equals}'."
             self._log_result(False, step_msg, details)
     
-    def check_within_range(self, actual_value: Union[int:float], expected_value: Union[int:float], within_range: Union[int:float], step_msg: str):
+    def check_within_range(self, actual_value: Union[int, float], expected_value: Union[int, float], within_range: Union[int, float], step_msg: str):
         """
         Validates that two values inside a range.
 
