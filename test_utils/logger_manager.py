@@ -36,6 +36,8 @@ class LoggerManager:
         caller_file_name = current_file_path.split("\\")[-1].strip(".py")
         current_dir = cls._get_repo_path()
         log_folder = Config.log_folder
+        if not log_folder:
+            raise ValueError(f"Error config folder no tiene valor: {log_folder}")
         default_log_folder_path = os.path.join(current_dir, log_folder)
         try:
             os.makedirs(default_log_folder_path)
