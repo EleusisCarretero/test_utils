@@ -140,7 +140,7 @@ class ResultManagerClass:
             self._log_result(True, step_msg, details)
             self.step_status = True
 
-    def check_less_equals(self, actual_value: Union[int:float], expected_less_equals: Union[int:float], step_msg: str):
+    def check_less_equals(self, actual_value: Union[int, float], expected_less_equals: Union[int, float], step_msg: str):
         """
         Validates that two values are equals and tracks the result.
 
