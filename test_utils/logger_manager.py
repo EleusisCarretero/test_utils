@@ -78,11 +78,18 @@ class LoggerManager:
     def _get_repo_path():
         repo_path = None
         current_path = Path(__file__).resolve()
+        
         for parent in current_path.parents:
             if (parent / "README.md").exists():
                 repo_path = parent
                 break
+
+        if repo_path is None:  # 🔴 Si no encuentra README.md, usa el directorio actual
+            print("No se encontró `README.md`. Usando `os.getcwd()` como fallback.")
+            repo_path = Path(os.getcwd())  # 🔥 Evita que `None` se propague
+        
         return repo_path
+
 
 if __name__ == '__main__':
     # test the logger
