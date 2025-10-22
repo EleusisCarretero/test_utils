@@ -1,7 +1,7 @@
 """
 Contents the ResultManager Class and its corresponding exception
 """
-from typing import Callable, Union
+from typing import Callable, Union, Any
 from test_utils.logger_manager import LoggerManager
 
 
@@ -78,7 +78,7 @@ class ResultManagerClass:
             details = f"Expected NOT to be: '{expected_value}', but got: '{actual_value}'."
             self._log_result(False, step_msg, details)
 
-    def check_not_raises_any_exception(self, method: Callable, step_msg: str, *args, **kwargs) -> None:
+    def check_not_raises_any_exception(self, method: Callable, step_msg: str, *args, **kwargs) -> Any:
         """
         Validates that when a function/method is executed ANY type of exception is not raised.
 
